@@ -4,7 +4,9 @@ from .models import\
     Ingredient,\
     IngredientStock,\
     Product,\
-    ProductStock
+    ProductStock,\
+    Pizza,\
+    Recipe
 
 def add_ingredient_to_base():
 
@@ -40,7 +42,22 @@ def add_product_to_restaurant_stock(product,restaurant):
     ).save()
 
 def add_pizza_to_base():
-    pass
+
+    Pizza(
+        label='margherita',
+        description = 'On a pas su faire plus simple',
+        price = 10.0,
+        nb_sold = 130,
+    ).save()
+
+def add_recipe_to_base(ingredient, pizza):
+
+    Recipe(
+        ingredient = ingredient,
+        pizza = pizza,
+        amount = 3.5,
+        unit = 'tranches'
+    ).save()
 
 # Create your tests here.
 
@@ -104,6 +121,32 @@ class StockTest(TestCase):
         self.assertEqual(prod_stock.restaurant.label, 'Paris centre')
         self.assertEqual(prod_stock.product.label, 'Coca-Cola')
 
+    def test_adding_pizza_to_base(self):
+
+        add_pizza_to_base()
+
+        pizza = Pizza.objects.get(pk=1)
+
+        self.assertEqual(pizza.label, 'margherita')
+        self.assertEqual(pizza.description, 'On a pas su faire plus simple')
+        self.assertEqual(pizza.price, 10.0)
+        self.assertEqual(pizza.nb_sold, 130)
+
+    def test_adding_recipe_to_base(self):
+
+        add_ingredient_to_base()
+        ingredient = Ingredient.objects.get(pk=1)
+
+        add_pizza_to_base()
+        pizza = Pizza.objects.get(pk=1)
+
+        add_recipe_to_base(ingredient, pizza)
+        recipe = Recipe.objects.get(pk=1)
+
+        self.assertEqual(recipe.ingredient.label, 'salade')
+        self.assertEqual(recipe.pizza.label, 'margherita')
+        self.assertEqual(recipe.amount, 3.5)
+        self.assertEqual(recipe.unit, 'tranches')
 
 
 
