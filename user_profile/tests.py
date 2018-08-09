@@ -4,8 +4,8 @@ from .models import UserInfo, PostalAddress, UserType
 
 def create_user_types():
 
-    u_t_1 = UserType(label='admin').save()
-    u_t_2 = UserType(label='client').save()
+    UserType(label='admin').save()
+    UserType(label='client').save()
 
 
 def create_full_user_no_address():
