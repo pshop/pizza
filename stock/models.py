@@ -72,4 +72,15 @@ class Recipe(models.Model):
     amount = models.DecimalField(max_digits=6, decimal_places=2)
     unit = models.CharField(max_length=50)
 
+class Menu(models.Model):
 
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    label = models.CharField(max_length=50)
+    description = models.CharField(max_length=300)
+    products = models.ManyToManyField(
+        Product,
+        related_name='menus')
+    pizzas = models.ManyToManyField(
+        Pizza,
+        related_name='menus'
+    )
