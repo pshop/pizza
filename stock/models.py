@@ -1,12 +1,12 @@
 from django.db import models
 
+
 # Create your models here.
 
 
 class Restaurant(models.Model):
 
     label = models.CharField(max_length=50, null=False)
-
 
 class Ingredient(models.Model):
 
@@ -15,7 +15,6 @@ class Ingredient(models.Model):
         Restaurant,
         through='IngredientStock',
         related_name='ingredients')
-
 
 class IngredientStock(models.Model):
     """
@@ -31,7 +30,6 @@ class IngredientStock(models.Model):
 
     quantity = models.DecimalField(max_digits=8, decimal_places=2)
     unit = models.CharField(max_length=50)
-
 
 class Product(models.Model):
 

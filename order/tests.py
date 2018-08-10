@@ -81,14 +81,12 @@ class OrderTest(TestCase):
         panier = add_panier_in_base()
         self.assertEqual(panier.id, 1)
 
-
     def test_adding_product_to_panier(self):
         panier_product = add_product_in_panier()
 
         self.assertEqual(panier_product.product.label, 'Coca-Cola')
         self.assertEqual(panier_product.quantity, 1)
         self.assertEqual(panier_product.panier.id, 1)
-
 
     def test_adding_menu_to_panier(self):
         panier_menu = add_menu_in_panier()
@@ -97,14 +95,12 @@ class OrderTest(TestCase):
         self.assertEqual(panier_menu.quantity, 3)
         self.assertEqual(panier_menu.panier.id, 1)
 
-
     def test_adding_pizza_to_panier(self):
         panier_pizza = add_pizza_in_panier()
 
         self.assertEqual(panier_pizza.pizza.label, 'margherita')
         self.assertEqual(panier_pizza.quantity, 2)
         self.assertEqual(panier_pizza.panier.id,1)
-
 
     def test_add_get_three_items_to_panier(self):
 
